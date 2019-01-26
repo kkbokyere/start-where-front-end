@@ -8,10 +8,11 @@ class Homepage extends Component {
       interests: []
     }
   }
-  handleSubmitSearch = (e) => {
+  handleSubmitSearch = async (e) => {
     console.log(this.state);
     //call api
     //
+    fetch();
     e.preventDefault();
     return false;
   };
@@ -28,7 +29,7 @@ class Homepage extends Component {
   };
   render() {
     return (
-      <div className="App">
+      <div className="homepage">
         <h1>Start Where</h1>
         <div>
           <input onChange={this.handleSetLocation} name="location" placeholder="Location"/>
