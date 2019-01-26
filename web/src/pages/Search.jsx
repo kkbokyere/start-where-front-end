@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Search.scss';
 class Search extends Component {
   constructor() {
@@ -8,11 +9,8 @@ class Search extends Component {
       interests: []
     }
   }
-  handleSubmitSearch = async (e) => {
-    console.log(this.state);
-    //call api
-    //
-    e.preventDefault();
+  handleSubmitSearch = (e) => {
+    this.props.onSubmitLocation(this.state);
     return false;
   };
   handleSetLocation = (e) => {
@@ -41,5 +39,9 @@ class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  onSubmitLocation: PropTypes.func,
+};
 
 export default Search;
