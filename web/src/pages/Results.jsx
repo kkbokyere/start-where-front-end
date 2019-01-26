@@ -3,6 +3,14 @@ import Map from '../components/Map/Map';
 import './Results.scss'
 
 class Results extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      noOfHappy: 0,
+      noOfNeutral: 0,
+      noOfSad: 0,
+    }
+  }
   onMarkerClick = () => {
     console.log('click marker')
   };
@@ -10,13 +18,34 @@ class Results extends Component {
   componentDidUpdate(prevProps, prevState) {
     console.log(this.props.data);
 
+    if(prevProps.data.length !== this.props.data.length) {
+      this.calculateMapReactions();
+    }
+
   }
-  mapReactions = () => {
-    console.log(this.props.data);
+  calculateMapReactions = () => {
+    let noOfHappy = 0, noOfNeutral = 0, noOfSad = 0;
+    this.props.data.forEach(({neutral, sad, happy}) => {
+      noOfHappy = noOfHappy + happy;
+      noOfNeutral = noOfNeutral + neutral;
+      noOfSad = noOfSad + sad;
+    });
+
+    this.setState({
+      noOfHappy,
+      noOfNeutral,
+      noOfSad
+    });
+  };
+
+  handleOnClickReaction = (type) => {
+    console.log('reaction', type);
+
   };
 
   render() {
     const { data } = this.props;
+    const { noOfHappy, noOfNeutral, noOfSad} = this.state;
 
     return (
       <div className="results">
@@ -34,7 +63,9 @@ class Results extends Component {
         <aside className="sidebar">
           <h2>Reactions</h2>
           <ul>
-            <li></li>
+            <li onClick={() => this.handleOnClickReaction('happy')}>Happy: {noOfHappy}</li>
+            <li onClick={() => this.handleOnClickReaction('neutral')}>Neutral: {noOfNeutral}</li>
+            <li onClick={() => this.handleOnClickReaction('sad')}>Sad: {noOfSad}</li>
           </ul>
         </aside>
       </div>
