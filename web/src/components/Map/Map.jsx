@@ -1,3 +1,4 @@
+/*window google*/
 import React from "react";
 import PropTypes from 'prop-types';
 import { compose, withProps } from "recompose";
@@ -16,6 +17,7 @@ const Map = compose(
   withScriptjs,
   withGoogleMap
 )((props) => {
+  const google = window.google;
   return (
     <GoogleMap
       defaultZoom={8}
@@ -27,7 +29,16 @@ const Map = compose(
         enableRetinaIcons
         gridSize={60}
       >
-        {props.markers && props.markers.map(({ lng, lat }) => <Marker key={`${lng}+${lat}`} position={{ lng, lat }}/>)}
+        {props.markers && props.markers.map(({ lng, lat, size = 10 }) => {
+          return (
+            <Marker
+              icon={{
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: size
+              }}
+              key={`${lng}+${lat}`} position={{ lng, lat }}/>
+          )
+        })}
       </MarkerClusterer>
     </GoogleMap>
   )

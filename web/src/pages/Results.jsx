@@ -9,6 +9,7 @@ class Results extends Component {
       noOfHappy: 0,
       noOfNeutral: 0,
       noOfSad: 0,
+      markers: []
     }
   }
   onMarkerClick = () => {
@@ -16,16 +17,14 @@ class Results extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.data);
-
-    if(prevProps.data.length !== this.props.data.length) {
+    if(prevProps.data.locations.length !== this.props.data.locations.length) {
       this.calculateMapReactions();
     }
 
   }
   calculateMapReactions = () => {
     let noOfHappy = 0, noOfNeutral = 0, noOfSad = 0;
-    this.props.data.forEach(({neutral, sad, happy}) => {
+    this.props.data.locations.forEach(({neutral, sad, happy}) => {
       noOfHappy = noOfHappy + happy;
       noOfNeutral = noOfNeutral + neutral;
       noOfSad = noOfSad + sad;
@@ -40,32 +39,45 @@ class Results extends Component {
 
   handleOnClickReaction = (type) => {
     console.log('reaction', type);
-
+    const updatedMarkers = this.props.data.locations.map((props, i, array) => {
+      return {
+        lng: props.lng,
+        lat: props.lat,
+        size: props[type]
+      }
+    });
+    this.setState({
+      markers: updatedMarkers
+    })
   };
 
   render() {
     const { data } = this.props;
-    const { noOfHappy, noOfNeutral, noOfSad} = this.state;
-
+    const { noOfHappy, noOfNeutral, noOfSad, updatedMarkers} = this.state;
+    console.log(updatedMarkers);
     return (
       <div className="results">
         <aside className="sidebar">
-          <h2>Top Location</h2>
+          <h2>Locations</h2>
           <ul>
-          {data.map(({ name }) => <li key={name}>{name}</li>)}
+          {data && data.locations.map(({ name }) => <li key={name}>{name}</li>)}
+          </ul>
+          <h2>Related Words</h2>
+          <ul>
+          {data && data.relatedWords.map((word) => <li key={word}>{word}</li>)}
           </ul>
         </aside>
         <Map
-          markers={this.props.data}
+          markers={data && data.locations}
           isMarkerShown
           onMarkerClick={this.onMarkerClick}
         />
         <aside className="sidebar">
-          <h2>Reactions</h2>
+          <h2>Overall Satisfaction</h2>
           <ul>
-            <li onClick={() => this.handleOnClickReaction('happy')}>Happy: {noOfHappy}</li>
-            <li onClick={() => this.handleOnClickReaction('neutral')}>Neutral: {noOfNeutral}</li>
-            <li onClick={() => this.handleOnClickReaction('sad')}>Sad: {noOfSad}</li>
+            <li onClick={() => this.handleOnClickReaction('happy')}>Happy: {`${noOfHappy}%`}</li>
+            <li onClick={() => this.handleOnClickReaction('neutral')}>Neutral: {`${noOfNeutral}%`}</li>
+            <li onClick={() => this.handleOnClickReaction('sad')}>Sad: {`${noOfSad}%`}</li>
           </ul>
         </aside>
       </div>
