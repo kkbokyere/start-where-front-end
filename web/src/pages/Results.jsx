@@ -38,7 +38,7 @@ class Results extends Component {
   };
 
   handleOnClickReaction = (type) => {
-    console.log('reaction', type);
+      console.log('reaction', type);
     const updatedMarkers = this.props.data.locations.map((props, i, array) => {
       return {
         lng: props.lng,
@@ -54,7 +54,6 @@ class Results extends Component {
   render() {
     const { data } = this.props;
     const { noOfHappy, noOfNeutral, noOfSad, updatedMarkers} = this.state;
-    console.log(updatedMarkers);
     return (
       <div className="results">
         <aside className="sidebar">
@@ -64,7 +63,7 @@ class Results extends Component {
           </ul>
           <h2>Related Words</h2>
           <ul>
-          {data && data.relatedWords.map((word) => <li key={word}>{word}</li>)}
+          {data && data.related_words.map((word) => <li key={word}>{word}</li>)}
           </ul>
         </aside>
         <Map

@@ -19,7 +19,7 @@ const responseData = { locations: [{
   neutral: 10,
   sad: 40,
 }],
-relatedWords: ['related','related2']};
+  related_words: ['related','related2']};
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class App extends Component {
     this.state = {
       data: {
         locations: [],
-        relatedWords: []
+        related_words: []
       },
     }
   }
