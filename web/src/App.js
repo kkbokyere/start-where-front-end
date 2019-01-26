@@ -5,18 +5,26 @@ import Results from "./pages/Results";
 
 
 const responseData = [{
-  name: 'brixton',
-  lat: '',
-  lng: '',
-  happy: '',
-  nuetral: '',
+  name: 'Brixton',
+  lat: 51.4613,
+  lng: -0.1156,
+  happy: 20,
+  neutral: 60,
+  sad: 20
+},{
+  name: 'Tottenham',
+  lat: 51.6050,
+  lng: -0.0723,
+  happy: 50,
+  neutral: 10,
+  sad: 40,
 }];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      data: [],
     }
   }
   handleFetchData = async ({ location, interests }) => {

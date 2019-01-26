@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+
 import './Search.scss';
 class Search extends Component {
   constructor() {
@@ -31,8 +33,8 @@ class Search extends Component {
         <div>
           {/*<Input onChange={this.handleSetLocation} placeholder="location"/>*/}
           {/*<Input onChange={this.handleSetInterests} placeholder="location"/>*/}
-          <input onChange={this.handleSetLocation} name="location" placeholder="Location"/>
-          <input onChange={this.handleSetInterests} name="interest" placeholder="Interests"/>
+          <TextField onChange={this.handleSetLocation} name="location" placeholder="Location"/>
+          <TextField onChange={this.handleSetInterests} name="interest" placeholder="Interests"/>
           <button type="submit" onClick={this.handleSubmitSearch}>Search</button>
         </div>
       </div>
