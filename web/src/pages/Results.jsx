@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import HeatCircle from "../components/HeatCircle/HeatCircle";
+import Map from '../components/Map/Map';
+import './Results.scss'
 
 class Results extends Component {
   constructor() {
@@ -15,16 +16,28 @@ class Results extends Component {
     });
   }
 
-  render() {
-    console.log(this.state.data);
-    return (
-      <div className="results-page">
-        <div>
+  onMarkerClick = () => {
+    console.log('click marker')
+  };
 
-        </div>
-        <HeatCircle width={200}/>
-        <HeatCircle width={200}/>
-        <HeatCircle width={200}/>
+  render() {
+    return (
+      <div className="results">
+        <aside className="sidebar">
+          <h2>Top Location</h2>
+        </aside>
+        <Map
+          isMarkerShown
+          onMarkerClick={this.onMarkerClick}
+        />
+        <aside className="sidebar">
+          <h2>Hashtags</h2>
+
+          <ul>
+            <li>
+          </li>
+          </ul>
+        </aside>
       </div>
     );
   }

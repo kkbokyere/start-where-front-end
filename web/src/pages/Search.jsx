@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-class Homepage extends Component {
+import './Search.scss';
+class Search extends Component {
   constructor() {
     super();
     this.state = {
@@ -12,7 +12,6 @@ class Homepage extends Component {
     console.log(this.state);
     //call api
     //
-    fetch();
     e.preventDefault();
     return false;
   };
@@ -29,9 +28,11 @@ class Homepage extends Component {
   };
   render() {
     return (
-      <div className="homepage">
+      <div className="search">
         <h1>Start Where</h1>
         <div>
+          {/*<Input onChange={this.handleSetLocation} placeholder="location"/>*/}
+          {/*<Input onChange={this.handleSetInterests} placeholder="location"/>*/}
           <input onChange={this.handleSetLocation} name="location" placeholder="Location"/>
           <input onChange={this.handleSetInterests} name="interest" placeholder="Interests"/>
           <button type="submit" onClick={this.handleSubmitSearch}>Search</button>
@@ -41,4 +42,4 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+export default Search;
