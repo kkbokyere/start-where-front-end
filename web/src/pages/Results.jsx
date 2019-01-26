@@ -3,11 +3,6 @@ import Map from '../components/Map/Map';
 import './Results.scss'
 
 class Results extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   onMarkerClick = () => {
     console.log('click marker')
   };

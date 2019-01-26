@@ -1,6 +1,7 @@
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer"
 const API_KEY='AIzaSyABbR1-ZuMWKXNndSGbErtHfW3ieDB0vw8';
 const Map = compose(
   withProps({
@@ -16,7 +17,22 @@ const Map = compose(
     defaultZoom={8}
     defaultCenter={{ lng: -0.118092, lat: 51.509865 }}
   >
-    {props.isMarkerShown && <Marker position={{ lng: -0.118092, lat: 51.509865 }} onClick={props.onMarkerClick} />}
+    <MarkerClusterer
+      onClick={props.onMarkerClustererClick}
+      averageCenter
+      enableRetinaIcons
+      gridSize={60}
+    >
+      <Marker
+        position={{ lng: -0.118092, lat: 51.509865 }}
+      />
+      <Marker
+        position={{ lng: -0.118092, lat: 51.509865 }}
+      />
+      <Marker
+        position={{ lng: -0.118092, lat: 51.509865 }}
+      />
+    </MarkerClusterer>
   </GoogleMap>
 );
 

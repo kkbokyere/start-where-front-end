@@ -20,7 +20,7 @@ class App extends Component {
     }
   }
   handleFetchData = async ({ location, interests }) => {
-    const data = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    // const responseData = await fetch('https://jsonplaceholder.typicode.com/todos/1');
     this.setState({
       data:responseData
     });
